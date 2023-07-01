@@ -400,12 +400,11 @@
   },
   {
     "id": "Превью заявки",
-    "text": " Турция – Стамбул\nТарифы:\n\uD83D\uDC64 1 заявитель – ..... руб. \uD83D\uDC65 2 заявителя – ..... руб. \uD83E\uDEC2 3 заявителя – ....... руб. \uD83D\uDC64 +1 заявитель – ......... руб.\n---\n⚠ ПЕРЕД ЗАПОЛНЕНИЕМ ЗАЯВКИ\nУБЕДИТЕСЬ, ЧТО:\n✅ Создан Личный кабинет на\nнеобходимую страну в системе «Official U.\nS. Department of State Visa Appointment\nService» [ссылка]\n✅ Оплачен консульский сбор в размере $\n160/190 в зависимости от типа визы",
     "dynamicViewName": "request_summary",
     "options": [
       {
-        "text": "Заполнить заявку.",
-        "nextViewId": "Приветствие"
+        "text": "Заполнить заявку",
+        "nextViewId": "Заполнение заявки"
       },
 
       {
@@ -414,6 +413,51 @@
       }
     ]
   },
+  {
+    "id": "Заполнение заявки",
+    "dynamicViewName": "request_form",
+    "options": [
+      {
+        "text": "E-mail",
+        "nextViewId": "ввод email"
+      },
+      {
+        "text": "Пароль",
+        "nextViewId": ""
+      },
+      {
+        "text": "Количество заявителей",
+        "nextViewId": ""
+      },
+      {
+        "text": "Период для записи",
+        "nextViewId": ""
+      },
+      {
+        "text": "Запас дней для собеседования",
+        "nextViewId": ""
+      },
+      {
+        "text": "ОТПРАВИТЬ ЗАЯВКУ",
+        "nextViewId": ""
+      }
+    ]
+  },
+  {
+    "id": "ввод email",
+    "text": "Отправьте в ответном сообщении E-mail Личного кабинета\n* Например, example@site.com",
+    "callFunction": {
+      "functionName": "set_email",
+      "args": []
+    },
+    "options": [
+      {
+        "text": "Назад",
+        "dynamicViewName": "request_form"
+      }
+    ]
+  },
+
   {
     "id": "",
     "text": "",

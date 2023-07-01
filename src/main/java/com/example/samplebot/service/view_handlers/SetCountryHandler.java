@@ -20,11 +20,15 @@ public class SetCountryHandler implements ViewHandler {
     }
 
     @Override
-    public void run(UserVO userVO, List<String> args) {
+    public ViewHandlerResult run(UserVO userVO, List<String> args, String input) {
         Country country = Arrays.stream(Country.values())
                 .filter(v -> v.description.equals(args.get(0)))
                 .findAny().get();
         userVO.setCountry(country);
         userVO.setCity(args.get(1));
+
+         return ViewHandlerResult.builder()
+                 .nextViewName("Превью заявки")
+                 .build();
     }
 }

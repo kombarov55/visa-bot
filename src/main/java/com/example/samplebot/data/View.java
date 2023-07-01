@@ -20,4 +20,6 @@ public class View {
     private String dynamicViewName;
 
     private List<Option> options;
+
+    private CallFunction callFunction;
 }

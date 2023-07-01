@@ -41,4 +41,6 @@ public class UserVO {
 
     private Integer daysReserve;
 
+    private Integer amount;
+
 }

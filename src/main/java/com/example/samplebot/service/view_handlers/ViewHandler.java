@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ViewHandler {
 
-    void run(UserVO userVO, List<String> args);
+    ViewHandlerResult run(UserVO userVO, List<String> args, String input);
 
 }

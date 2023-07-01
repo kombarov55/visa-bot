@@ -11,6 +11,7 @@ import com.example.samplebot.data.Option;
 import com.example.samplebot.service.DynamicViews;
 import com.example.samplebot.service.ViewHandlerFunctions;
 import com.example.samplebot.service.dynamic_views.DynamicView;
+import com.example.samplebot.service.view_handlers.ViewHandlerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
@@ -104,14 +105,55 @@ public class SampleBot extends TelegramLongPollingCommandBot {
         
         UserVO userVO = optional.get();
 
-        Option option = viewService.findCurrentOption(userVO.getCurrentViewId(), text);
+        View currentView = viewService.findById(userVO.getCurrentViewId()).get();
 
-        if (option.getCallFunction() != null) {
-            CallFunction fun = option.getCallFunction();
-            viewHandlerFunctions.execute(userVO, fun);
+        String nextViewId = "";
+
+        if (currentView.getCallFunction() != null) {
+            CallFunction fun = currentView.getCallFunction();
+            ViewHandlerResult viewHandlerResult = viewHandlerFunctions.execute(userVO, fun, text);
+            if (viewHandlerResult.getNextViewName() != null) {
+                nextViewId = viewHandlerResult.getNextViewName();
+            }
+
+            if (viewHandlerResult.getTextToSend() != null) {
+                SendMessage sendMessage = new SendMessage();
+                sendMessage.setChatId(chatId + "");
+                sendMessage.setText(viewHandlerResult.getTextToSend());
+                try {
+                    execute(sendMessage);
+                } catch (Exception e) {
+                    log.error("", e);
+                }
+            }
+        } else {
+
+            Option option = viewService.findCurrentOption(userVO.getCurrentViewId(), text);
+
+            nextViewId = option.getNextViewId();
+
+            if (option.getCallFunction() != null) {
+                CallFunction fun = option.getCallFunction();
+                ViewHandlerResult viewHandlerResult = viewHandlerFunctions.execute(userVO, fun, text);
+                if (viewHandlerResult.getNextViewName() != null) {
+                    nextViewId = viewHandlerResult.getNextViewName();
+                }
+
+                if (viewHandlerResult.getTextToSend() != null) {
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setChatId(chatId + "");
+                    sendMessage.setText(viewHandlerResult.getTextToSend());
+                    try {
+                        execute(sendMessage);
+                    } catch (Exception e) {
+                        log.error("", e);
+                    }
+                }
+            }
         }
 
-        Optional<View> optionalView = viewService.findNextViewByCurrentIdAndOptionText(userVO.getCurrentViewId(), text);
+//        Optional<View> optionalView = viewService.findNextViewByCurrentIdAndOptionText(userVO.getCurrentViewId(), text);
+        Optional<View> optionalView = viewService.findById(nextViewId);
         
         if (optionalView.isPresent()) {
             View view = optionalView.get();

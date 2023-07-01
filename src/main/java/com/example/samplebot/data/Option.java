@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Option {
     private String text;
     private String nextViewId;
-
     private CallFunction callFunction;
+    private String dynamicViewName;
 }

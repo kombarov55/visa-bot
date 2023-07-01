@@ -2,6 +2,7 @@ package com.example.samplebot.service;
 
 import com.example.samplebot.data.UserVO;
 import com.example.samplebot.service.dynamic_views.DynamicView;
+import com.example.samplebot.service.dynamic_views.RequestForm;
 import com.example.samplebot.service.dynamic_views.RequestSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,9 +19,13 @@ public class DynamicViews {
     @Autowired
     private RequestSummary requestSummary;
 
+    @Autowired
+    private RequestForm requestForm;
+
     @PostConstruct
     public void init() {
         views.put("request_summary", requestSummary);
+        views.put("request_form", requestForm);
     }
 
     public String buildViewText(UserVO userVO, String name) {
