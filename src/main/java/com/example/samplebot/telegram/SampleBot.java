@@ -55,7 +55,7 @@ public class SampleBot extends TelegramLongPollingCommandBot {
 
     @Override
     public String getBotUsername() {
-        return "sample_kombarov_bot";
+        return "visa_assistant__";
     }
 
     @Override
@@ -81,12 +81,13 @@ public class SampleBot extends TelegramLongPollingCommandBot {
         
         if (userRepository.existsByChatId(chatId)) {
             vo = userRepository.findByChatId(chatId).get();
-        } else {
-            vo = UserVO.builder()
-            .id(UUID.randomUUID())
-            .chatId(chatId)
-            .build();            
+            userRepository.delete(vo);
         }
+
+        vo = UserVO.builder()
+                .id(UUID.randomUUID())
+                .chatId(chatId)
+                .build();
         
         vo.setCurrentViewId("Приветствие");
         

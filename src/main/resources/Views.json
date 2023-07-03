@@ -423,19 +423,19 @@
       },
       {
         "text": "Пароль",
-        "nextViewId": ""
+        "nextViewId": "ввод пароля"
       },
       {
         "text": "Количество заявителей",
-        "nextViewId": ""
+        "nextViewId": "ввод количества"
       },
       {
         "text": "Период для записи",
-        "nextViewId": ""
+        "nextViewId": "ввод ранней даты"
       },
       {
         "text": "Запас дней для собеседования",
-        "nextViewId": ""
+        "nextViewId": "ввод запаса дней"
       },
       {
         "text": "ОТПРАВИТЬ ЗАЯВКУ",
@@ -457,14 +457,67 @@
       }
     ]
   },
-
   {
-    "id": "",
-    "text": "",
+    "id": "ввод пароля",
+    "text": "Отправьте в ответном сообщении Пароль\nот Личного кабинета\n* Обратите внимание на заглавные буквы\nи спецсимволы! ↘\n",
+    "callFunction": {
+      "functionName": "set_password",
+      "args": []
+    },
     "options": [
       {
-        "text": "",
-        "nextViewId": ""
+        "text": "Назад",
+        "dynamicViewName": "request_form"
+      }
+    ]
+  },
+  {
+    "id": "ввод количества",
+    "text": "\uD83D\uDC64 Введите количество заявителей\n* Не более 5 заявителей в одном Личном\nкабинете ↘",
+    "callFunction": {
+      "functionName": "set_amount",
+      "args": []
+    },
+    "options": [
+      {
+        "text": "Назад",
+        "dynamicViewName": "request_form"
+      }
+    ]
+  },
+  {
+    "id": "ввод ранней даты",
+    "text": "\uD83D\uDCC5⏩ Введите самую раннюю дату\n* Например, 15.06.2023\nОбратите внимание на формат вводимой\nдаты ДД.ММ.ГГГГ ↘\n",
+    "callFunction": {
+      "functionName": "set_min_date",
+      "args": []
+    },
+    "options": [
+      {
+        "text": "Назад",
+        "dynamicViewName": "request_form"
+      }
+    ]
+  },
+  {
+    "id": "ввод поздней даты",
+    "text": "\uD83D\uDCC5⏪ Введите самую позднюю дату\n* Например, 16.06.2023\nОбратите внимание на формат вводимой\nдаты ДД.ММ.ГГГГ ↘\n",
+    "callFunction": {
+      "functionName": "set_max_date",
+      "args": []
+    }
+  },
+  {
+    "id": "ввод запаса дней",
+    "text": "Введите запас дней (необязательно)",
+    "callFunction": {
+      "functionName": "set_days_reserve",
+      "args": []
+    },
+    "options": [
+      {
+        "text": "Назад",
+        "dynamicViewName": "request_form"
       }
     ]
   }
